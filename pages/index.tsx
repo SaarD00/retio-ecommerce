@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Slider from "../components/Slider";
@@ -26,8 +26,8 @@ const Home = ({ stores }: Props) => {
 };
 
 export default Home;
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  const stores: Store[] = await fetchStores();
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const stores = await fetchStores();
 
   return {
     props: {

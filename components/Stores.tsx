@@ -5,13 +5,13 @@ interface Props {
   stores: Stores[];
 }
 
-const Stores = ({ stores }: Props) => {
+const Stores = ({ stores: storesProps }: Props) => {
   // Declare a state variable to keep track of which div is active
 
-  const [store, setStore] = useState(stores);
+  const [store, setStore] = useState<Stores[]>(storesProps);
 
   const [activeTab, setActiveTab] = useState("relevance");
-  const sortedStores: Stores[] = [...stores].sort((a, b) => {
+  const sortedStores: Stores[] = [...store].sort((a, b) => {
     if (activeTab === "relevance") {
       // No need to sort if the tab is "relevance"
       return 0;
