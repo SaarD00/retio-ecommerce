@@ -14,41 +14,19 @@ interface Props {
 }
 
 function search({ types, stores, category }: Props) {
-  async function getCategory(input: string) {
-    try {
-      const response = await fetch(`https://api.openai.com/v1/categories`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-        },
-        body: JSON.stringify({
-          query: input,
-        }),
-      });
-      const data = await response.json();
-      return data.category;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   const [searchQuery, setSearchQuery] = useState("");
-
   const [filteredStores, setFilteredStores] = useState(stores);
 
-  const handleSearchInputChange = async (
+  const handleSearchInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const searchQuery = event.target.value;
     setSearchQuery(searchQuery);
 
     if (searchQuery.length >= 3) {
-      const category = await getCategory(searchQuery);
-      console.log(category); // this will log the closest category to the input value
       const filteredStores = stores.filter(
         (store) =>
-          store.name.includes(searchQuery) ||
+          store.name.toLowerCase().includes(searchQuery) ||
           store.category.some((cat) =>
             cat.title.toLowerCase().includes(searchQuery)
           )
