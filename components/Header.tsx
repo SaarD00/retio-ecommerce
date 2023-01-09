@@ -64,13 +64,13 @@ const Header: React.FC = () => {
 
   const carthasitem = false;
   return (
-    <div className="bg-white flex justify-between border-b max-w-7xl mx-auto p-5">
+    <div className="bg-white flex justify-between border-b max-w-7xl mx-auto p-5 overflow-hidden">
       {/* FIRST */}
       <div className="flex justify-center items-center gap-10 py-2 ">
         <div onClick={() => router.push("/")} className="cursor-pointer">
           <Image width={150} height={50} src={logo} alt="Logo" />
         </div>
-        <div className="flex gap-2 justify-center items-center">
+        <div className=" gap-2 cursor-pointer hidden md:flex justify-center items-center">
           <h1 className="font-bold space-x-3 text-sm group flex justify-center items-center  ">
             <span className="underline-offset-[7px] group-hover:text-Retio-secondary underline text-Retio-primary">
               {town}
@@ -83,19 +83,19 @@ const Header: React.FC = () => {
         </div>
       </div>
       {/* Sdcond */}
-      <div className="flex justify-center items-center font-semibold gap-14 py-2">
+      <div className="flex justify-center items-center font-semibold md:gap-14 gap-2 py-2">
         <div
           onClick={() => {
             router.push("/search");
           }}
-          className="flex gap-4 text-Retio-primary  group"
+          className="flex gap-1 md:gap-4 text-Retio-primary pl-3 md:px-0  group"
         >
-          <MagnifyingGlassIcon className="text-Retio-primary w-5  group-hover:text-green-400 font-semibold" />
+          <MagnifyingGlassIcon className="text-Retio-primary md:w-5 w-3 hidden md:inline group-hover:text-green-400 font-semibold" />
           <h1 className="group-hover:text-Retio-secondary group-hover:cursor-pointer">
             Search
           </h1>
         </div>
-        <div className="flex gap-4 text-Retio-primary  group">
+        <div className=" gap-4 text-Retio-primary hidden md:flex  group">
           <FolderPlusIcon className="text-Retio-primary w-5  group-hover:text-green-400 font-semibold" />
           <h1 className="group-hover:text-Retio-secondary group-hover:cursor-pointer">
             Add Store
@@ -103,27 +103,27 @@ const Header: React.FC = () => {
         </div>
         <div
           onClick={() => (session ? null : signIn())}
-          className="flex gap-4 text-Retio-primary  group"
+          className="flex gap-2 md:gap-4 text-Retio-primary  group"
         >
           {session ? (
-            <UserIcon className="text-Retio-primary w-5  group-hover:text-green-400 font-semibold" />
+            <UserIcon className="text-Retio-primary w-5 hidden md:inline  group-hover:text-green-400 font-semibold" />
           ) : (
-            <UserIcon className="text-Retio-primary w-5  group-hover:text-green-400 font-semibold" />
+            <UserIcon className="text-Retio-primary w-5 hidden md:inline  group-hover:text-green-400 font-semibold" />
           )}
 
-          <h1 className="group-hover:text-Retio-secondary group-hover:cursor-pointer">
+          <h1 className="group-hover:text-Retio-secondary  group-hover:cursor-pointer">
             {session ? session?.user?.name : "Sign Up"}
           </h1>
         </div>
-        <div className="flex gap-4 text-Retio-primary  group">
+        <div className="flex md:gap-4 gap-1 text-Retio-primary  group">
           {carthasitem ? (
             <>
-              <ShoppingCartIcon className=" w-5  text-red-500 font-semibold" />
+              <ShoppingCartIcon className=" w-2 md:w-5  text-red-500 font-semibold" />
               <h1 className="text-red-500 group-hover:cursor-pointer">Cart</h1>
             </>
           ) : (
             <>
-              <ShoppingCartIcon className="text-Retio-primary w-5  group-hover:text-green-400 font-semibold" />
+              <ShoppingCartIcon className="text-Retio-primary w-5 hidden md:inline group-hover:text-green-400 font-semibold" />
               <h1 className="group-hover:text-Retio-secondary group-hover:cursor-pointer">
                 Cart
               </h1>

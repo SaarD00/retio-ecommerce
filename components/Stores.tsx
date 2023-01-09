@@ -35,12 +35,14 @@ const Stores = ({ stores: storesProps }: Props) => {
     <div className="max-w-7xl p-5 mx-auto justify-center">
       {/* Header */}
       <div className="justify-between flex items-center border-b">
-        <h1 className="text-3xl font-semibold">{store.length} stores</h1>
+        <h1 className="text-3xl  md:font-semibold ">{store.length} stores</h1>
         <div className="flex gap-10 p-5">
           <div
             className={`${
-              activeTab === "relevance" ? "underline underline-offset-8" : ""
-            } cursor-pointer`}
+              activeTab === "relevance"
+                ? "underline underline-offset-8 !hover:text-black"
+                : ""
+            } cursor-pointer hover:text-black/70 `}
             onClick={() => handleClick("relevance")}
           >
             <h1>Relevance</h1>
@@ -48,7 +50,7 @@ const Stores = ({ stores: storesProps }: Props) => {
           <div
             className={`${
               activeTab === "rating" ? "underline  underline-offset-8" : ""
-            } cursor-pointer`}
+            } cursor-pointer hover:text-black/70`}
             onClick={() => handleClick("rating")}
           >
             <h1>Rating</h1>
@@ -56,10 +58,11 @@ const Stores = ({ stores: storesProps }: Props) => {
           <div
             className={`${
               activeTab === "lowToHigh" ? "underline underline-offset-8" : ""
-            } cursor-pointer`}
+            } cursor-pointer hover:text-black/70`}
             onClick={() => handleClick("lowToHigh")}
           >
-            <h1>Low To High</h1>
+            <h1 className="hidden md:flex">Low To High</h1>
+            <h1 className="md:hidden">Lowest</h1>
           </div>
         </div>
       </div>
