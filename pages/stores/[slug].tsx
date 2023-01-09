@@ -4,6 +4,7 @@ import React from "react";
 import { sanityClient } from "../../sanity";
 import { Category, Stores as Store, Types } from "../../typings";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 interface Props {
   store: Store;
@@ -13,8 +14,12 @@ function storePage({ store }: Props) {
   const StorePage = dynamic(() => import("../../components/StorePage"), {
     ssr: false,
   });
+  const Header = dynamic(() => import("../../components/Header"), {
+    suspense: false,
+  });
   return (
     <div>
+      <Header />
       <StorePage store={store} />
     </div>
   );

@@ -39,6 +39,7 @@ function search({ types, stores, category }: Props) {
 
   return (
     <div>
+      <Header />
       <SearchBar
         category={category}
         stores={filteredStores}

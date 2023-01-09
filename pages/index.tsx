@@ -1,14 +1,11 @@
 import type { GetStaticProps, NextPage } from "next";
+import dynamic from "next/dynamic";
 import Head from "next/head";
-import Image from "next/image";
-import Header from "../components/Header";
 import Slider from "../components/Slider";
 import Stores from "../components/Stores";
 import { Category, Stores as Store, Types } from "../typings";
-import { fetchCategory } from "../utils/fetchCategory";
 import { fetchStores } from "../utils/fetchStores";
-import { fetchTypes } from "../utils/fetchTypes";
-
+import Header from "../components/Header";
 interface Props {
   stores: Store[];
 }
@@ -20,6 +17,8 @@ const Home = ({ stores }: Props) => {
         <title>Retio - Ecommerce</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Header />
+
       <Slider />
       <Stores stores={stores} />
     </div>
