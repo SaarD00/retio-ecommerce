@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import React, { useState } from "react";
 import Header from "../components/Header";
 import { Category, Stores, Types } from "../typings";
@@ -8,12 +8,11 @@ import { fetchTypes } from "../utils/fetchTypes";
 import dynamic from "next/dynamic";
 import SearchBar from "../components/SearchBar";
 interface Props {
-  types: Types[];
   stores: Stores[];
   category: Category[];
 }
 
-function search({ types, stores, category }: Props) {
+function search({ stores, category }: Props) {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredStores, setFilteredStores] = useState(stores);
 
@@ -51,16 +50,14 @@ function search({ types, stores, category }: Props) {
 }
 
 export default search;
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  const stores: Stores[] = await fetchStores();
-  const category: Category[] = await fetchCategory();
-  const types: Types[] = await fetchTypes();
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const stores = await fetchStores();
+  const category = await fetchCategory();
 
   return {
     props: {
       stores,
       category,
-      types,
     },
   };
 };

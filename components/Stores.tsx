@@ -77,7 +77,9 @@ const Stores = ({ stores: storesProps }: Props) => {
             <div>
               <h1 className="text-lg font-semibold mt-3 px-1">{store.name}</h1>
               {store.types.map((type) => (
-                <h2 className="text-sm font-light">{type.title}</h2>
+                <p key={type._id} className="text-sm font-light">
+                  {type.title}
+                </p>
               ))}
             </div>
             <div className="justify-between flex">

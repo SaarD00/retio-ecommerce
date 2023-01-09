@@ -41,7 +41,6 @@ const Header: React.FC = () => {
         .then((data) => {
           // Extract and format address from geocoding data
           const address = data.features[0].place_name;
-          console.log(address);
           setAddress(address);
         })
         .catch((error) => {
@@ -54,7 +53,6 @@ const Header: React.FC = () => {
         .then((data) => {
           // Extract and format town name from geocoding data
           const town = data.features[0].text;
-          console.log(town);
           setTown(town);
         })
         .catch((error) => {

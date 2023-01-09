@@ -13,26 +13,6 @@ const SearchBar = ({
   onSearchInputChange,
   searchQuery,
 }: Props) => {
-  const [input, setInput] = useState("");
-  console.log(process.env.OPENAI_API_KEY);
-  async function getCategory(input: string) {
-    try {
-      const response = await fetch(`https://api.openai.com/v1/categories`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-        },
-        body: JSON.stringify({
-          query: input,
-        }),
-      });
-      const data = await response.json();
-      return data.category;
-    } catch (error) {
-      console.error(error);
-    }
-  }
   return (
     <div className="mx-auto max-w-7xl ">
       <div className="flex justify-center items-center   p-5">
@@ -52,10 +32,7 @@ const SearchBar = ({
               href={`/stores/${store.slug.current}`}
               key={store._id}
             >
-              <div
-                key={store._id}
-                className="flex justify-start hover:bg-Retio-secondary/10 hover:cursor-pointer rounded-lg p-2 py-5 w-full"
-              >
+              <div className="flex justify-start hover:bg-Retio-secondary/10 hover:cursor-pointer rounded-lg p-2 py-5 w-full">
                 <div className="flex space-x-5">
                   <img
                     src={store.image}
@@ -64,7 +41,9 @@ const SearchBar = ({
                   <div>
                     <h1 className="font-[380]">{store.name}</h1>
                     {store.types.map((type) => (
-                      <h1 className="font-[200] text-sm">{type.title}</h1>
+                      <p key={type._id} className="font-[200] text-sm">
+                        {type.title}
+                      </p>
                     ))}
                   </div>
                 </div>
