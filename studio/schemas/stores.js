@@ -46,12 +46,12 @@ export default defineType({
       type: 'array',
       of: [{type: 'reference', to: {type: 'types'}}],
     }),
-    defineField({
-      name: 'item',
-      title: 'Item',
-      type: 'array',
-      of: [{type: 'reference', to: {type: 'item'}}],
-    }),
+    // defineField({
+    //   name: 'item',
+    //   title: 'Item',
+    //   type: 'array',
+    //   of: [{type: 'reference', to: {type: 'item'}}],
+    // }),
     defineField({
       name: 'category',
       title: 'Categories',

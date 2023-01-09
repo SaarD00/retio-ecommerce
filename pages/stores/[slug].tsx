@@ -1,23 +1,18 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import StorePage from "../../components/StorePage";
 import { sanityClient } from "../../sanity";
 import { Category, Stores as Store, Types } from "../../typings";
-import { fetchCategory } from "../../utils/fetchCategory";
-import { fetchStoreBySlug } from "../../utils/fetchStoreBySlug";
-import { fetchStores } from "../../utils/fetchStores";
-import { fetchTypes } from "../../utils/fetchTypes";
+import dynamic from "next/dynamic";
 
 interface Props {
-  types: Types[];
   store: Store;
-  category: Category[];
 }
 
-function storePage({ store, types, category }: Props) {
-  const router = useRouter();
-  console.log(store.name);
+function storePage({ store }: Props) {
+  const StorePage = dynamic(() => import("../../components/StorePage"), {
+    ssr: false,
+  });
   return (
     <div>
       <StorePage store={store} />
