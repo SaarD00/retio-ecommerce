@@ -40,7 +40,5 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
       category,
       types,
     },
-
-    revalidate: 20,
   };
 };
