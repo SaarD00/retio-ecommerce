@@ -10,12 +10,10 @@ import { fetchStores } from "../utils/fetchStores";
 import { fetchTypes } from "../utils/fetchTypes";
 
 interface Props {
-  types: Types[];
   stores: Store[];
-  category: Category[];
 }
 
-const Home = ({ types, stores, category }: Props) => {
+const Home = ({ stores }: Props) => {
   return (
     <div>
       <Head>
@@ -31,14 +29,10 @@ const Home = ({ types, stores, category }: Props) => {
 export default Home;
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const stores: Store[] = await fetchStores();
-  const category: Category[] = await fetchCategory();
-  const types: Types[] = await fetchTypes();
 
   return {
     props: {
       stores,
-      category,
-      types,
     },
   };
 };
