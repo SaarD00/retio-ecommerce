@@ -6,15 +6,18 @@ import { Stores as Store } from "../../typings";
 
 const query = groq`
 *[_type == "stores"] {
+  ...,
+  types[]->{
     ...,
-    types[]->{
-      ...,
-    },
-    category[]->{
+  },
+  items[]->{
     ...,
-  }
-  
-  }  | order(_createdAt asc)
+  },  
+    
+  category[]->{
+  ...,
+}
+}  | order(_createdAt asc)
 `
 
 type Data = {

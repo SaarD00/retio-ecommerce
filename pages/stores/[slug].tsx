@@ -55,6 +55,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     types[]->{
       ...,
     },
+    items[]->{
+      ...,
+    },  
     category[]->{
     ...,
   }

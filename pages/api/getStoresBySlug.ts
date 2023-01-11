@@ -10,6 +10,9 @@ const query = groq`
     types[]->{
       ...,
     },
+    items[]->{
+      ...,
+    },  
     category[]->{
     ...,
   }

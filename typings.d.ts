@@ -18,11 +18,20 @@ export interface Stores extends SanityBody {
     image: string
     types: Types[]
     category: Category[]
+    items: Items[]
 }
 
 export interface Types extends SanityBody {
     _type: "types"
     title: string
+}
+export interface Items extends SanityBody {
+    _type: "items"
+    name: string
+    cost: number
+    description: string
+    recommended: boolean
+    image: string
 }
 
 
