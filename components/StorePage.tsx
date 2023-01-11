@@ -1,11 +1,17 @@
 import React, { MouseEventHandler, useState } from "react";
-import { Stores as Store } from "../typings";
+import { Stores as Store, Items } from "../typings";
 import { StarIcon } from "@heroicons/react/24/outline";
+import Header from "./Header";
 interface Props {
   store: Store;
 }
 
 const StorePage = ({ store }: Props) => {
+  const [cartItems, setCartItems] = useState<Items[]>([]);
+  console.log(cartItems);
+  const addToCart: (item: Items) => void = (item) => {
+    setCartItems([...cartItems, item]);
+  };
   const useHover = (): [
     boolean,
     {
@@ -32,6 +38,8 @@ const StorePage = ({ store }: Props) => {
 
   return (
     <div className="">
+      <Header cartItems={cartItems} />
+
       <div key={store._id} className=" p-5 bg-Retio-secondary/10 ">
         <div className="max-w-7xl  mx-auto w-full flex gap-10 py-5 px-10">
           <img
@@ -65,7 +73,10 @@ const StorePage = ({ store }: Props) => {
           </h1>
           <div className="mt-5">
             {store.items.map((item) => (
-              <div className="border-b justify-between items-center flex p-10">
+              <div
+                key={item._id}
+                className="border-b justify-between items-center flex p-10"
+              >
                 <div className="flex items-start gap-5">
                   <img className="w-36  p-1" src={item.image} />
                   <div className="flex flex-col">
@@ -76,6 +87,7 @@ const StorePage = ({ store }: Props) => {
                     <div
                       className="p-5 border border-Retio-secondary group w-32 flex cursor-pointer justify-center items-center hover:bg-Retio-secondary transition-all duration-500 ease-in-out mt-5 rounded-lg"
                       {...hoverProps}
+                      onClick={() => addToCart(item)}
                     >
                       <h2 className="group-hover:text-white transition-all duration-700 ease-in-out text-black">
                         {isHovered ? "Add To Cart" : `₹${item.cost}`}

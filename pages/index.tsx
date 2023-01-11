@@ -5,7 +5,7 @@ import Slider from "../components/Slider";
 import Stores from "../components/Stores";
 import { Category, Stores as Store, Types } from "../typings";
 import { fetchStores } from "../utils/fetchStores";
-import Header from "../components/Header";
+import Header from "../components/Header2";
 interface Props {
   stores: Store[];
 }
@@ -17,6 +17,7 @@ const Home = ({ stores }: Props) => {
         <title>Retio - Ecommerce</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {/* @ts-ignore */}
       <Header />
 
       <Slider />

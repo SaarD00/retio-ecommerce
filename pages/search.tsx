@@ -1,6 +1,6 @@
 import { GetServerSideProps, GetStaticProps } from "next";
 import React, { useState } from "react";
-import Header from "../components/Header";
+import Header from "../components/Header2";
 import { Category, Stores, Types } from "../typings";
 import { fetchCategory } from "../utils/fetchCategory";
 import { fetchStores } from "../utils/fetchStores";
@@ -38,6 +38,7 @@ function search({ stores, category }: Props) {
 
   return (
     <div>
+      {/* @ts-ignore */}
       <Header />
       <SearchBar
         category={category}

@@ -11,7 +11,6 @@ import {
 import { signIn, signOut } from "next-auth/react";
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { Items } from "../typings";
 
 interface Position {
   coords: {
@@ -27,11 +26,7 @@ interface Position {
   };
 }
 
-interface Props {
-  cartItems: Items[];
-}
-
-const Header = ({ cartItems }: Props) => {
+const Header: React.FC = () => {
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
   const [town, setTown] = useState("");
@@ -69,14 +64,11 @@ const Header = ({ cartItems }: Props) => {
 
   const carthasitem = false;
   return (
-    <div
-      className="bg-white flex justify-between border-b sticky top-0 
-     max-w-7xl mx-auto p-5 overflow-hidden"
-    >
+    <div className="bg-white flex justify-between border-b max-w-7xl mx-auto p-5 overflow-hidden">
       {/* FIRST */}
       <div className="flex justify-center items-center gap-10 py-2 ">
         <div onClick={() => router.push("/")} className="cursor-pointer">
-          <Image quality={100} width={150} height={50} src={logo} alt="Logo" />
+          <Image width={150} height={50} src={logo} alt="Logo" />
         </div>
         <div className=" gap-2 cursor-pointer hidden md:flex justify-center items-center">
           <h1 className="font-bold space-x-3 text-sm group flex justify-center items-center  ">
@@ -132,9 +124,6 @@ const Header = ({ cartItems }: Props) => {
           ) : (
             <>
               <ShoppingCartIcon className="text-Retio-primary w-5 hidden md:inline group-hover:text-green-400 font-semibold" />
-              <p className="absolute group-hover:text-Retio-secondary group-hover:cursor-pointer -mt-4 mx-3 px-1 ">
-                {cartItems.length > 0 ? cartItems.length : null}
-              </p>
               <h1 className="group-hover:text-Retio-secondary group-hover:cursor-pointer">
                 Cart
               </h1>

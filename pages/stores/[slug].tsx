@@ -5,6 +5,7 @@ import { sanityClient } from "../../sanity";
 import { Category, Stores as Store, Types } from "../../typings";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import Header from "../../components/Header";
 
 interface Props {
   store: Store;
@@ -14,12 +15,11 @@ function storePage({ store }: Props) {
   const StorePage = dynamic(() => import("../../components/StorePage"), {
     ssr: false,
   });
-  const Header = dynamic(() => import("../../components/Header"), {
-    suspense: false,
-  });
+  // const Header = dynamic(() => import("../../components/Header"), {
+  //   ssr: false,
+  // });
   return (
     <div>
-      <Header />
       <StorePage store={store} />
     </div>
   );
