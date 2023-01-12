@@ -1,6 +1,6 @@
 import { GetServerSideProps, GetStaticProps } from "next";
 import React, { useState } from "react";
-import Header from "../components/Header2";
+import Header from "../components/Header";
 import { Category, Stores, Types } from "../typings";
 import { fetchCategory } from "../utils/fetchCategory";
 import { fetchStores } from "../utils/fetchStores";

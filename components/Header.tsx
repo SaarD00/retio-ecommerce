@@ -12,6 +12,7 @@ import { signIn, signOut } from "next-auth/react";
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { Items } from "../typings";
+import { useSelector } from "react-redux";
 
 interface Position {
   coords: {
@@ -27,11 +28,8 @@ interface Position {
   };
 }
 
-interface Props {
-  cartItems: Items[];
-}
-
-const Header = ({ cartItems }: Props) => {
+const Header = () => {
+  const counter = useSelector((state: any) => state.counter);
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
   const [town, setTown] = useState("");
@@ -133,7 +131,7 @@ const Header = ({ cartItems }: Props) => {
             <>
               <ShoppingCartIcon className="text-Retio-primary w-5 hidden md:inline group-hover:text-green-400 font-semibold" />
               <p className="absolute group-hover:text-Retio-secondary group-hover:cursor-pointer -mt-4 mx-3 px-1 ">
-                {cartItems.length > 0 ? cartItems.length : null}
+                {counter}
               </p>
               <h1 className="group-hover:text-Retio-secondary group-hover:cursor-pointer">
                 Cart

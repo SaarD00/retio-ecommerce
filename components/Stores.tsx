@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { Stores } from "../typings";
 
@@ -6,6 +7,7 @@ interface Props {
 }
 
 const Stores = ({ stores: storesProps }: Props) => {
+  const router = useRouter();
   // Declare a state variable to keep track of which div is active
 
   const [store, setStore] = useState<Stores[]>(storesProps);
@@ -69,7 +71,11 @@ const Stores = ({ stores: storesProps }: Props) => {
       {/* Stores */}
       <div className="p-5 flex gap-16  flex-wrap justify-center   ">
         {sortedStores.map((store) => (
-          <div key={store._id} className="p-2  border rounded-lg ">
+          <div
+            onClick={() => router.push(`/stores/${store.slug.current}`)}
+            key={store._id}
+            className="p-2  border rounded-lg  cursor-pointer hover:border-Retio-secondary/50 transition-all duration-200"
+          >
             <div>
               <img
                 loading="lazy"

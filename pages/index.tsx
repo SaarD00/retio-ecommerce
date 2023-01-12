@@ -5,7 +5,7 @@ import Slider from "../components/Slider";
 import Stores from "../components/Stores";
 import { Category, Stores as Store, Types } from "../typings";
 import { fetchStores } from "../utils/fetchStores";
-import Header from "../components/Header2";
+import Header from "../components/Header";
 interface Props {
   stores: Store[];
 }
