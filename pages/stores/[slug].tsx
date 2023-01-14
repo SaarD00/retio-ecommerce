@@ -6,7 +6,7 @@ import { Category, Stores as Store, Types } from "../../typings";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import Header from "../../components/Header";
-
+import Head from "next/head";
 interface Props {
   store: Store;
 }
@@ -20,6 +20,10 @@ function storePage({ store }: Props) {
   // });
   return (
     <div>
+      <Head>
+        <title>Retio - Ecommerce</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <StorePage store={store} />
     </div>
   );

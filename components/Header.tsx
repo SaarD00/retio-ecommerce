@@ -9,10 +9,11 @@ import {
   ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
 import { signIn, signOut } from "next-auth/react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useSession } from "next-auth/react";
 import { Items } from "../typings";
 import { useSelector } from "react-redux";
+import { CartContext } from "../context/context";
 
 interface Position {
   coords: {
@@ -29,7 +30,7 @@ interface Position {
 }
 
 const Header = () => {
-  const counter = useSelector((state: any) => state.counter);
+  const { addToCart, cart, removeFromCart } = useContext(CartContext);
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
   const [town, setTown] = useState("");
@@ -121,7 +122,10 @@ const Header = () => {
             {session ? session?.user?.name : "Sign Up"}
           </h1>
         </div>
-        <div className="flex md:gap-4 gap-1 text-Retio-primary  group">
+        <div
+          onClick={() => router.push("/cart/cart")}
+          className="flex md:gap-4 gap-1 text-Retio-primary  group"
+        >
           {carthasitem ? (
             <>
               <ShoppingCartIcon className=" w-2 md:w-5  text-red-500 font-semibold" />
@@ -131,7 +135,7 @@ const Header = () => {
             <>
               <ShoppingCartIcon className="text-Retio-primary w-5 hidden md:inline group-hover:text-green-400 font-semibold" />
               <p className="absolute group-hover:text-Retio-secondary group-hover:cursor-pointer -mt-4 mx-3 px-1 ">
-                {counter}
+                {cart?.length}
               </p>
               <h1 className="group-hover:text-Retio-secondary group-hover:cursor-pointer">
                 Cart
