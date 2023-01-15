@@ -14,7 +14,8 @@ interface Props {
 
 const StorePage = ({ store }: Props) => {
   // @ts-ignore
-  const { addToCart, cart, removeFromCart } = useContext(CartContext);
+  const { addToCart, cart, removeFromCart, totalItems } =
+    useContext(CartContext);
   console.log(cart);
   const useHover = (): [
     boolean,
@@ -89,29 +90,30 @@ const StorePage = ({ store }: Props) => {
                       {item.description}
                     </p>
                     {cart?.length! > 0 ? (
-                      <div
-                        className="p-5 border border-Retio-secondary group w-32 flex cursor-pointer justify-center items-center hover:bg-Retio-secondary transition-all duration-500 ease-in-out mt-5 rounded-lg"
-                        {...hoverProps}
-                        // onClick={() => addToCart(item)}
-                      >
-                        <h2 className="group-hover:text-white transition-all duration-700 ease-in-out text-black">
-                          {isHovered ? (
-                            <div className="flex justify-between gap-5">
-                              <ArrowUpIcon
-                                onClick={() => addToCart(item)}
-                                className="text-white/60 hover:text-white  rounded-full w-6 "
-                              />
-                              <ArrowDownIcon
-                                onClick={() => removeFromCart(item)}
-                                className="text-white/60 hover:text-white w-6"
-                              />
-                              {cart?.length}
-                            </div>
-                          ) : (
-                            `₹${item.cost}`
-                          )}
-                        </h2>
-                      </div>
+                      <>
+                        <div
+                          className="p-5 border border-Retio-secondary group w-32 flex cursor-pointer justify-center items-center hover:bg-Retio-secondary transition-all duration-500 ease-in-out mt-5 rounded-lg"
+                          {...hoverProps}
+                          // onClick={() => addToCart(item)}
+                        >
+                          <h2 className="group-hover:text-white transition-all duration-700 ease-in-out text-black">
+                            {isHovered ? (
+                              <div className="flex justify-between gap-5">
+                                <ArrowUpIcon
+                                  onClick={() => addToCart(item)}
+                                  className="text-white/60 hover:text-white  rounded-full w-6 "
+                                />
+                                <ArrowDownIcon
+                                  onClick={() => removeFromCart(item)}
+                                  className="text-white/60 hover:text-white w-6"
+                                />
+                              </div>
+                            ) : (
+                              `₹${item.cost}`
+                            )}
+                          </h2>
+                        </div>
+                      </>
                     ) : (
                       <>
                         <div

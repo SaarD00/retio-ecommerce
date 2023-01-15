@@ -7,6 +7,7 @@ interface CartContextType {
   removeFromCart: (item: Items) => void;
   clearCart: () => void;
   totalPrice: number;
+  totalItems: number;
 }
 
 const CartDefault: CartContextType = {
@@ -15,6 +16,7 @@ const CartDefault: CartContextType = {
   removeFromCart: () => {},
   clearCart: () => {},
   totalPrice: 0,
+  totalItems: 0,
 };
 
 export const CartContext = createContext<CartContextType>(CartDefault);
@@ -25,21 +27,48 @@ interface CartProviderProps {
 
 export function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<Items[]>([]);
+  const [items, setItems] = useState<Items[]>([]);
 
   function addToCart(item: Items) {
-    setCart([...cart, item]);
+    // check if the item is already in the cart
+    const existingItem = cart.find((i) => i._id === item._id);
+    if (existingItem) {
+      // if the item is already in the cart, increase the quantity by 1
+      setCart(
+        cart.map((i) =>
+          i._id === item._id ? { ...i, quantity: i.quantity + 1 } : i
+        )
+      );
+    } else {
+      // if the item is not in the cart, add it with quantity = 1
+      setCart([...cart, { ...item, quantity: 1 }]);
+    }
   }
 
   function removeFromCart(item: Items) {
-    setCart(cart.filter((i) => i._id !== item._id));
+    const existingItem = cart.find((i) => i._id === i._id);
+    if (existingItem && existingItem.quantity > 1) {
+      // if the item is already in the cart and the quantity is more than 1, decrease the quantity by 1
+      setCart(
+        cart.map((i) =>
+          i._id === item._id ? { ...i, quantity: i.quantity - 1 } : i
+        )
+      );
+    } else {
+      // if the item is not in the cart or the quantity is 1, remove it completely from the cart
+      setCart(cart.filter((i) => i._id !== item._id));
+    }
   }
 
   function clearCart() {
     setCart([]);
   }
-
   function totalPrice() {
-    return cart.reduce((total, item) => total + item.cost, 0);
+    return cart.reduce((total, item) => item.quantity * item.cost, 0);
+  }
+
+  function totalItems() {
+    return cart.reduce((total, item) => total + item.quantity, 0);
   }
 
   const value = {
@@ -48,6 +77,7 @@ export function CartProvider({ children }: CartProviderProps) {
     removeFromCart,
     totalPrice,
     clearCart,
+    totalItems,
   };
   return (
     <>

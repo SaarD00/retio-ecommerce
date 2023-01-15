@@ -30,7 +30,8 @@ interface Position {
 }
 
 const Header = () => {
-  const { addToCart, cart, removeFromCart } = useContext(CartContext);
+  const { addToCart, cart, removeFromCart, totalItems } =
+    useContext(CartContext);
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
   const [town, setTown] = useState("");
@@ -135,7 +136,8 @@ const Header = () => {
             <>
               <ShoppingCartIcon className="text-Retio-primary w-5 hidden md:inline group-hover:text-green-400 font-semibold" />
               <p className="absolute group-hover:text-Retio-secondary group-hover:cursor-pointer -mt-4 mx-3 px-1 ">
-                {cart?.length}
+                {/* @ts-ignore */}
+                {totalItems()}
               </p>
               <h1 className="group-hover:text-Retio-secondary group-hover:cursor-pointer">
                 Cart

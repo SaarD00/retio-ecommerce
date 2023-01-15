@@ -42,23 +42,34 @@ const Cart = () => {
                   </td>
                   <td className="p-2 w-fit border-t border-gray-200">
                     <div className="bg-white/60 flex py-1 w-fit">
-                      <div className="border p-2 hover:bg-Retio-secondary group transition-all duration-200 cursor-pointer">
-                        <PlusIcon className="text-black w-6 group-hover:text-white" />
+                      <div
+                        onClick={() => addToCart(carts)}
+                        className="border p-2 hover:bg-Retio-secondary group transition-all duration-200 cursor-pointer"
+                      >
+                        <PlusIcon className="text-black w-6 group-hover:text-white transition-all duration-500" />
                       </div>
-                      <div className="border p-2 px-4">{cart.length}</div>
-                      <div className="border p-2">
-                        <MinusIcon className="text-black w-6" />
+                      <div className="border p-2 px-4">{carts.quantity}</div>
+                      <div
+                        onClick={() => {
+                          removeFromCart(carts);
+                        }}
+                        className="border p-2 items-center flex bg-black/5 cursor-pointer hover:bg-Retio-secondary transition-all duration-200 group"
+                      >
+                        <MinusIcon className="text-black w-5 group-hover:text-white transition-all duration-500" />
                       </div>
                     </div>
                   </td>
-                  <td className="p-2 border-t border-gray-200">$20</td>
+                  <td className="p-2 border-t border-gray-200">
+                    ₹{carts.quantity * carts.cost}
+                  </td>
                 </tr>
               </tbody>
             </table>
           ))}
         </div>
         <div className="flex justify-between">
-          <p className="text-sm font-medium">Total: {totalPrice}</p>
+          {/* @ts-ignore */}
+          <p className="text-sm font-medium">Total: {totalPrice()}</p>
           <button className="bg-Retio-secondary/20 text-black hover:bg-Retio-secondary hover:text-white transition-all duration-200 py-2 px-4 rounded-lg">
             Checkout
           </button>

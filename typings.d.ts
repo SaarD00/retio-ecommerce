@@ -32,6 +32,7 @@ export interface Items extends SanityBody {
     description: string
     recommended: boolean
     image: string
+    quantity: number
 }
 
 
