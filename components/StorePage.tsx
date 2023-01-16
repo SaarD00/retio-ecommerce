@@ -107,6 +107,7 @@ const StorePage = ({ store }: Props) => {
                                   onClick={() => removeFromCart(item)}
                                   className="text-white/60 hover:text-white w-6"
                                 />
+                                <p></p>
                               </div>
                             ) : (
                               `₹${item.cost}`

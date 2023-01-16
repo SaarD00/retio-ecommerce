@@ -36,7 +36,12 @@ export function CartProvider({ children }: CartProviderProps) {
       // if the item is already in the cart, increase the quantity by 1
       setCart(
         cart.map((i) =>
-          i._id === item._id ? { ...i, quantity: i.quantity + 1 } : i
+          i._id === item._id
+            ? { ...i, quantity: i.quantity + 1 } || {
+                ...i,
+                quantity: item.quantity + 1,
+              }
+            : i
         )
       );
     } else {
@@ -64,7 +69,7 @@ export function CartProvider({ children }: CartProviderProps) {
     setCart([]);
   }
   function totalPrice() {
-    return cart.reduce((total, item) => item.quantity * item.cost, 0);
+    return cart.reduce((total, item) => total + item.quantity * item.cost, 0);
   }
 
   function totalItems() {
