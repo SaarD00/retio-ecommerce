@@ -18,6 +18,10 @@ const Home = ({ stores }: Props) => {
       <Head>
         <title>Retio - Ecommerce</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="description"
+          content="Easiest and Flexible way for purchasing retail products with less than a doorstep | Retio"
+        />
       </Head>
       {/* @ts-ignore */}
       <Header />
