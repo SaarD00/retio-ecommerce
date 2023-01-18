@@ -19,7 +19,7 @@ const SearchBar = ({
         <input
           onChange={onSearchInputChange}
           className="border border-black/20 rounded-lg placeholder:font-semibold  w-[70%] p-3 py-2 outline-none"
-          placeholder="Search for retail stores"
+          placeholder="Example: Electrical Stores"
         />
         {/* Results */}
       </div>

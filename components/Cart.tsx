@@ -1,10 +1,12 @@
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { createSecretKey } from "crypto";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import { CartContext } from "../context/context";
 
 const Cart = () => {
+  const router = useRouter();
   const { addToCart, cart, removeFromCart, totalPrice } =
     useContext(CartContext);
   const { data: session } = useSession();
@@ -70,8 +72,11 @@ const Cart = () => {
         <div className="flex justify-between">
           {/* @ts-ignore */}
           <p className="text-sm font-medium">Total: {totalPrice()}</p>
-          <button className="bg-Retio-secondary/20 text-black hover:bg-Retio-secondary hover:text-white transition-all duration-200 py-2 px-4 rounded-lg">
-            Checkout
+          <button
+            onClick={() => router.push("/checkout/payondelivery")}
+            className="bg-Retio-secondary/20 text-black hover:bg-Retio-secondary hover:text-white transition-all duration-200 py-2 px-4 rounded-lg"
+          >
+            Place Order
           </button>
         </div>
       </div>
