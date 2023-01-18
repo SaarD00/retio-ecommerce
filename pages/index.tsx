@@ -22,6 +22,10 @@ const Home = ({ stores }: Props) => {
           name="description"
           content="Easiest and Flexible way for purchasing retail products with less than a doorstep | Retio"
         />
+        <meta
+          property="og:image"
+          content="http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.4e47d276.png&w=256&q=100"
+        />
       </Head>
       {/* @ts-ignore */}
       <Header />
