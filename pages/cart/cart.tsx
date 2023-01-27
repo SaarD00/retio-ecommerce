@@ -2,9 +2,17 @@ import type { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import Cart from "../../components/Cart";
 import Header from "../../components/Header";
-const Home = () => {
+import { Items } from "../../typings";
+import { fetchItems } from "../../utils/fetchItems";
+
+interface Props {
+  items: Items[];
+}
+const Home = ({ items: itemsProps }: Props) => {
+  const [items, SetItems] = useState<Items[]>(itemsProps);
   const router = useRouter();
   return (
     <div>
@@ -24,9 +32,17 @@ const Home = () => {
           {router.pathname}
         </span>
       </div>
-      <Cart />
+      <Cart setItems={SetItems} />
     </div>
   );
 };
 
 export default Home;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const items = await fetchItems();
+  return {
+    props: {
+      items,
+    },
+  };
+};

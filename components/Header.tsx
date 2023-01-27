@@ -110,7 +110,7 @@ const Header = () => {
           </h1>
         </div>
         <div
-          onClick={() => (session ? null : signIn())}
+          onClick={() => (session ? router.push("/profile") : signIn())}
           className="flex gap-2 md:gap-4 text-Retio-primary  group"
         >
           {session ? (
@@ -137,7 +137,7 @@ const Header = () => {
               <ShoppingCartIcon className="text-Retio-primary w-5 hidden md:inline group-hover:text-green-400 font-semibold" />
               <p className="absolute group-hover:text-Retio-secondary group-hover:cursor-pointer -mt-4 mx-3 px-1 ">
                 {/* @ts-ignore */}
-                {totalItems()}
+                {totalItems() > 0 && totalItems()}
               </p>
               <h1 className="group-hover:text-Retio-secondary group-hover:cursor-pointer">
                 Cart

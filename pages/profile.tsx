@@ -57,7 +57,7 @@ const Home = ({ stores, users }: Props) => {
   return (
     <div>
       <Head>
-        <title>Retio - Ecommerce</title>
+        <title>Retio - Profile</title>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
@@ -80,8 +80,6 @@ const Home = ({ stores, users }: Props) => {
           {router.pathname}
         </span>
       </div>
-      <Slider />
-      <Stores stores={stores} />
     </div>
   );
 };

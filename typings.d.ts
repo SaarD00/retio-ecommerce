@@ -27,16 +27,38 @@ export interface Types extends SanityBody {
 }
 export interface Items extends SanityBody {
     _type: "items"
-    name: string
-    cost: number
-    description: string
-    recommended: boolean
-    image: string
-    quantity: number
+    name?: string
+    cost?: number
+    description?: string
+    recommended?: boolean
+    image?: string
+    quantity?: number
+    buyer?: string
+}
+
+export interface ItemBody {
+    name?: string
+    cost?: string
+    description?: string
+    recommended?: boolean
+    image?: string
+    quantity?: number
+    buyer?: string
 }
 
 
 export interface Category extends SanityBody {
     _type: "category"
     title: string
+}
+
+export interface User extends SanityBody {
+    _type: 'user'
+    name: string
+    email: string
+}
+
+export interface UserBody {
+    name: string
+    email: string
 }
