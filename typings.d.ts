@@ -58,11 +58,11 @@ export interface User extends SanityBody {
     _type: 'user'
     name: string
     email: string
-    orders: Items[]
+    orders?: Items[]
 }
 
 export interface UserBody {
     name: string
     email: string
-    orders: Items[]
+    orders?: Items[]
 }
