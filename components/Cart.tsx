@@ -10,13 +10,15 @@ import React, {
   useState,
 } from "react";
 import { CartContext } from "../context/context";
-import { ItemBody, Items } from "../typings";
+import { sanityClient } from "../sanity";
+import { ItemBody, Items, User } from "../typings";
 
 interface Props {
   setItems: Dispatch<SetStateAction<Items[]>>;
+  user: User;
 }
 
-const Cart = ({ setItems }: Props) => {
+const Cart = ({ setItems, user }: Props) => {
   const router = useRouter();
   const { addToCart, cart, removeFromCart, totalPrice } =
     useContext(CartContext);
@@ -42,29 +44,30 @@ const Cart = ({ setItems }: Props) => {
 
     return json;
   };
-  const userPostOrder = async () => {
-    const userOrderInfo: ItemBody = {
-      name: input,
-      buyer: session?.user?.name || "Unknown",
-      cost: cost || "0",
-    };
-
-    const result = await fetch(`/api/addOrderUser`, {
-      body: JSON.stringify(userOrderInfo),
-      method: "POST",
-    });
-
-    const json = await result.json();
-
-    return json;
-  };
+  // async function addOrderToUser() {
+  //   if (session?.user?.name !== cart?.map((carts) => carts.name)) {
+  //     return;
+  //   }
+  //   try {
+  //     const updatedOrders = [
+  //       ...user.orders,
+  //       { _ref: cart?.map((carts) => carts._id) },
+  //     ];
+  //     await sanityClient
+  //       .patch(user._id)
+  //       .set({ orders: updatedOrders })
+  //       .commit();
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   useEffect(() => {
     const input = cart?.map((carts) => carts.name);
     const input2 = input?.toString();
     setInput(input2!);
 
-    const cost = cart?.map((carts) => carts.cost);
+    const cost = cart?.map((carts) => carts.cost! * carts.quantity!);
     const cost2 = cost?.toString();
     setCost(cost2!);
   }, [cart]);
@@ -72,7 +75,7 @@ const Cart = ({ setItems }: Props) => {
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     postItem();
-    userPostOrder();
+    // addOrderToUser();
   };
 
   return (

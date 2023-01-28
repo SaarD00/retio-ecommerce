@@ -10,16 +10,16 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const data: Items[] = JSON.parse(req.body);
-  const data2: User = JSON.parse(req.body);
+  const data: ItemBody = JSON.parse(req.body);
+  const user: User = JSON.parse(req.body);
 
   const mutations = {
     mutations: [
       {
-        patch: {
-            id: data2._id,
-            set: {
-                orders: data
+        "patch": {
+            "id": user._id,
+            "set": {
+                "orders": data
             }
         },
       },

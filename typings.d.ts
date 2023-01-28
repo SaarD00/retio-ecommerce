@@ -34,6 +34,7 @@ export interface Items extends SanityBody {
     image?: string
     quantity?: number
     buyer?: string
+
 }
 
 export interface ItemBody {
@@ -44,6 +45,7 @@ export interface ItemBody {
     image?: string
     quantity?: number
     buyer?: string
+  
 }
 
 
@@ -56,9 +58,11 @@ export interface User extends SanityBody {
     _type: 'user'
     name: string
     email: string
+    orders: Items[]
 }
 
 export interface UserBody {
     name: string
     email: string
+    orders: Items[]
 }

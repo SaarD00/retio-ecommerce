@@ -37,9 +37,9 @@ export function CartProvider({ children }: CartProviderProps) {
       setCart(
         cart.map((i) =>
           i._id === item._id
-            ? { ...i, quantity: i.quantity + 1 } || {
+            ? { ...i, quantity: i.quantity! + 1 } || {
                 ...i,
-                quantity: item.quantity + 1,
+                quantity: item.quantity! + 1,
               }
             : i
         )
@@ -52,11 +52,11 @@ export function CartProvider({ children }: CartProviderProps) {
 
   function removeFromCart(item: Items) {
     const existingItem = cart.find((i) => i._id === i._id);
-    if (existingItem && existingItem.quantity > 1) {
+    if (existingItem && existingItem.quantity! > 1) {
       // if the item is already in the cart and the quantity is more than 1, decrease the quantity by 1
       setCart(
         cart.map((i) =>
-          i._id === item._id ? { ...i, quantity: i.quantity - 1 } : i
+          i._id === item._id ? { ...i, quantity: i.quantity! - 1 } : i
         )
       );
     } else {
@@ -69,11 +69,11 @@ export function CartProvider({ children }: CartProviderProps) {
     setCart([]);
   }
   function totalPrice() {
-    return cart.reduce((total, item) => total + item.quantity * item.cost, 0);
+    return cart.reduce((total, item) => total + item.quantity! * item.cost!, 0);
   }
 
   function totalItems() {
-    return cart.reduce((total, item) => total + item.quantity, 0);
+    return cart.reduce((total, item) => total + item.quantity!, 0);
   }
 
   const value = {
