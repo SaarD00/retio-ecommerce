@@ -5,14 +5,17 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Cart from "../../components/Cart";
 import Header from "../../components/Header";
-import { Items } from "../../typings";
+import { Items, User } from "../../typings";
 import { fetchItems } from "../../utils/fetchItems";
+import { fetchUsers } from "../../utils/fetchUsers";
 
 interface Props {
   items: Items[];
+  user: User;
 }
-const Home = ({ items: itemsProps }: Props) => {
+const Home = ({ items: itemsProps, user: userProps }: Props) => {
   const [items, SetItems] = useState<Items[]>(itemsProps);
+  const [user, SetUser] = useState<User>(userProps);
   const router = useRouter();
   return (
     <div>
@@ -32,7 +35,7 @@ const Home = ({ items: itemsProps }: Props) => {
           {router.pathname}
         </span>
       </div>
-      <Cart setItems={SetItems} />
+      <Cart user={user} setItems={SetItems} />
     </div>
   );
 };
@@ -40,9 +43,11 @@ const Home = ({ items: itemsProps }: Props) => {
 export default Home;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const items = await fetchItems();
+  const user = await fetchUsers();
   return {
     props: {
       items,
+      user,
     },
   };
 };
