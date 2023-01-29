@@ -5,17 +5,24 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Cart from "../../components/Cart";
 import Header from "../../components/Header";
-import { Items, User } from "../../typings";
+import { Items, Order, User } from "../../typings";
 import { fetchItems } from "../../utils/fetchItems";
+import { fetchOrders } from "../../utils/fetchOrder";
 import { fetchUsers } from "../../utils/fetchUsers";
 
 interface Props {
   items: Items[];
-  user: User;
+  user: User[];
+  orders: Order[];
 }
-const Home = ({ items: itemsProps, user: userProps }: Props) => {
+const Home = ({
+  items: itemsProps,
+  user: userProps,
+  orders: orderProps,
+}: Props) => {
   const [items, SetItems] = useState<Items[]>(itemsProps);
-  const [user, SetUser] = useState<User>(userProps);
+  const [orders, SetOrders] = useState<Order[]>(orderProps);
+  const [user, SetUser] = useState<User[]>(userProps);
   const router = useRouter();
   return (
     <div>
@@ -35,7 +42,7 @@ const Home = ({ items: itemsProps, user: userProps }: Props) => {
           {router.pathname}
         </span>
       </div>
-      <Cart user={user} setItems={SetItems} />
+      <Cart orders={orders} user={user} setItems={SetItems} />
     </div>
   );
 };
@@ -44,10 +51,12 @@ export default Home;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const items = await fetchItems();
   const user = await fetchUsers();
+  const orders = await fetchOrders();
   return {
     props: {
       items,
       user,
+      orders,
     },
   };
 };

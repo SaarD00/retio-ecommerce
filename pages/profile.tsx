@@ -79,6 +79,12 @@ const Home = ({ stores, users }: Props) => {
         >
           {router.pathname}
         </span>
+        <div className="flex justify-center ">
+          <p className=" text-2xl text-Retio-primary">
+            Welcome,{" "}
+            <span className="text-Retio-secondary">{session?.user?.name}</span>{" "}
+          </p>
+        </div>
       </div>
     </div>
   );

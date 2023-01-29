@@ -1,15 +1,21 @@
 import type { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import Slider from "../components/Slider";
-import Stores from "../components/Stores";
-import { Category, Stores as Store, Types, User, UserBody } from "../typings";
-import { fetchStores } from "../utils/fetchStores";
-import Header from "../components/Header";
+import Slider from "../../../components/Slider";
+import Stores from "../../../components/Stores";
+import {
+  Category,
+  Stores as Store,
+  Types,
+  User,
+  UserBody,
+} from "../../../typings";
+import { fetchStores } from "../../../utils/fetchStores";
+import Header from "../../../components/Header";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { fetchUsers } from "../utils/fetchUsers";
+import { fetchUsers } from "../../../utils/fetchUsers";
 
 interface Props {
   stores: Store[];
@@ -24,7 +30,6 @@ const Home = ({ stores, users }: Props) => {
     const userInfo: UserBody = {
       name: session?.user?.name || "",
       email: session?.user?.name || "",
-      
     };
     const result = await fetch(`/api/addUser`, {
       body: JSON.stringify(userInfo),

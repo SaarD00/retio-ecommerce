@@ -59,10 +59,31 @@ export interface User extends SanityBody {
     name: string
     email: string
     orders?: Items[]
+    address?: string
+    town?: string
 }
 
 export interface UserBody {
-    name: string
-    email: string
-    orders?: Items[]
+    name?: string
+    email?: string
+    orders?: Order[]
+    id?: string
+    address?: string
+    town?: string
+}
+
+
+export interface Order extends SanityBody {
+    name?: string
+    cost?: string
+    recommended?: boolean
+    quantity?: number
+    buyer?: string
+}
+export interface OrderBody  {
+    name?: string
+    cost?: string
+    recommended?: boolean
+    quantity?: number
+    buyer?: string
 }

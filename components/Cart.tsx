@@ -11,14 +11,15 @@ import React, {
 } from "react";
 import { CartContext } from "../context/context";
 import { sanityClient } from "../sanity";
-import { ItemBody, Items, User } from "../typings";
+import { ItemBody, Items, Order, OrderBody, User, UserBody } from "../typings";
 
 interface Props {
   setItems: Dispatch<SetStateAction<Items[]>>;
-  user: User;
+  user: User[];
+  orders: Order[];
 }
 
-const Cart = ({ setItems, user }: Props) => {
+const Cart = ({ setItems, user, orders }: Props) => {
   const router = useRouter();
   const { addToCart, cart, removeFromCart, totalPrice } =
     useContext(CartContext);
@@ -44,21 +45,34 @@ const Cart = ({ setItems, user }: Props) => {
 
     return json;
   };
+
+  // const users = user.filter((user) => user.name == session?.user?.name);
+  // // @ts-ignore
+  // const orderpro: string[] = cart?.map((carts) => carts.name);
+  // const properorder = orders.filter((order) => order.name === orderpro[0]);
+  // console.log(properorder);
+  // console.log(user[0]._id.toString());
   // async function addOrderToUser() {
-  //   if (session?.user?.name !== cart?.map((carts) => carts.name)) {
-  //     return;
-  //   }
   //   try {
-  //     const updatedOrders = [
-  //       ...user.orders,
-  //       { _ref: cart?.map((carts) => carts._id) },
-  //     ];
-  //     await sanityClient
-  //       .patch(user._id)
-  //       .set({ orders: updatedOrders })
-  //       .commit();
+  //     const postInfo: UserBody = {
+  //       id: users[0]._id,
+  //       name: session?.user?.name!,
+  //       email: session?.user?.email!,
+  //       orders: properorder,
+  //     };
+
+  //     const result = await fetch(`/api/addOrderUser`, {
+  //       body: JSON.stringify(postInfo),
+  //       method: "POST",
+  //     });
+
+  //     const json = await result.json();
+
+  //     console.log("succesfully patch done");
+  //     console.table("here is your json", json);
+  //     return json;
   //   } catch (error) {
-  //     console.error(error);
+  //     console.log(error);
   //   }
   // }
 
@@ -74,7 +88,8 @@ const Cart = ({ setItems, user }: Props) => {
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    postItem();
+    // postItem();
+    router.push("/checkout/billing/");
     // addOrderToUser();
   };
 
@@ -135,7 +150,7 @@ const Cart = ({ setItems, user }: Props) => {
                       />
                       <input
                         value={carts.name}
-                        className="outline-none bg-none rounded-lg w-full"
+                        className="outline-none hidden md:inline bg-none rounded-lg w-full"
                       />
                     </div>
                   </td>
