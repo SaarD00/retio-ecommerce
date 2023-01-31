@@ -50,6 +50,7 @@ const SearchBar = ({
               </div>
             </Link>
           ))}
+        {stores.length < 1 ? <p>No Stores found</p> : null}
       </div>
     </div>
   );

@@ -85,6 +85,9 @@ const Home = ({ stores, users }: Props) => {
             <span className="text-Retio-secondary">{session?.user?.name}</span>{" "}
           </p>
         </div>
+        <h1 className="flex justify-center items-center p-5 text-3xl">
+          Page currently in bulding!
+        </h1>
       </div>
     </div>
   );
